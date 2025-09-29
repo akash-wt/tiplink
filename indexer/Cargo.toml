@@ -3,9 +3,16 @@ name = "indexer"
 version = "0.1.0"
 edition = "2024"
 
+#bytes = "1.10.1"
+#futures = "0.3.31"
+
 [dependencies]
 tokio = { version = "1.0", features = ["full"] }
-tonic = "0.14.2"
-bytes = "1.10.1"
-futures = "0.3.31"
 yellowstone-grpc-proto = "9.0.0"
+yellowstone-grpc-client = "9.0.0"
+anyhow = "1.0.99"
+tonic = {version = "0.14.2", features = ["zstd", "gzip", "tls-native-roots", "tls-ring"]}
+tokio-stream = "0.1.17"
+chrono = "0.4.42"
+bs58 = "0.5.1"
+store = { path= "../store" }
