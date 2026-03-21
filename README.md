@@ -99,36 +99,6 @@ Shared database layer providing data persistence across all services.
 - Solana CLI tools (for testing)
 - Access to Solana RPC endpoint (devnet/testnet/mainnet)
 
-## Database Setup
-
-Create a PostgreSQL database and run the following schema:
-
-```sql
--- Users table
-CREATE TABLE users (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    email TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL,
-    public_key TEXT NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL
-);
-
--- Balances table
-CREATE TABLE balances (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id UUID NOT NULL REFERENCES users(id),
-    amount NUMERIC(20, 9) NOT NULL DEFAULT 0,
-    created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- Quote responses table
-CREATE TABLE quote_response (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    data JSONB NOT NULL,
-    created_at TIMESTAMPTZ DEFAULT NOW()
-);
-```
-
 ## Configuration
 
 Create a `.env` file in the project root:
@@ -282,17 +252,7 @@ cargo build --release --workspace
 - Requires all parties to be online for signing
 - No automatic key share recovery mechanism
 - Fixed threshold (all parties must participate)
-
-## Future Enhancements
-
-- [ ] Dynamic threshold support (t-of-n signatures)
-- [ ] Key share backup and recovery system
-- [ ] Mobile application integration
-- [ ] Hardware wallet integration
-- [ ] Mainnet production deployment
-- [ ] Additional blockchain support
-- [ ] Offline signing capability
-- [ ] Advanced transaction batching
+- Allow only to send solana native.
 
 ## Contributing
 
